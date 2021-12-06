@@ -52,17 +52,5 @@ describe 'ListMiniPairs Service Integration Test' do
       symbol_list = result.value!.list
       _(symbol_list).must_equal []
     end
-
-    it 'HAPPY: should not watched projects if they are not loaded' do
-      # GIVEN: we are watching a project that does not exist locally
-      watched_list = [MINI_SYMBOL]
-      # WHEN: we request a list of all watched projects
-      result = CryptoExpert::Service::ListMiniPairs.new.call(watched_list)
-
-      # THEN: it should return an empty list
-      _(result.success?).must_equal true
-      symbol_list = result.value!.list
-      _(symbol_list).must_equal []
-    end
   end
 end
