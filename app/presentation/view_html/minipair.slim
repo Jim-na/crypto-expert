@@ -1,3 +1,4 @@
+/ TODO: fix pair table css
 .container
   .col-12
     .jumbotron.text-left
@@ -10,19 +11,49 @@
           span
             = "Spot Volume"
         text
-          span.pair.volume style="padding-left:20px" id='pair.volume'
-            = pair.volume
+          span.pair.spot_volume style="padding-left:20px" id='pair.spot_volume'
+            = pair.spot_volume
       .row
         h5
           span
             = "Time"
         text
           span.pair.time style="padding-left:20px" id='pair.time'
-              = Time.at(pair.time/1000).utc.to_datetime
+              = pair.time
       .row
         h5
           span
             = "Signal Matrix"
+          div class="pairtable"
+            table class="table" id="pairtable"
+                thead
+                tr
+                    th volume_change_percent
+                    th spot_change_percent
+                    th funding_rate
+                    th longshort_ratio
+                    th open_interest
+                    th Signal
+                tbody
+                    tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
+                        td id='td_volume_change_percent'
+                            span class="table_volume_change_percent" 
+                            = pair.volume_change_percent 
+                        td id='td_spot_change_percent'
+                            span class="table_spot_change_percent"
+                            = pair.spot_change_percent
+                        td id='td_funding_rate'
+                            span class="table_funding_rate"
+                            = pair.funding_rate
+                        td id='td_longshort_ratio'
+                            span class="table_longshort_ratio"
+                            = pair.longshort_ratio
+                        td id='td_open_interest'
+                            span class="table_open_interest"
+                            = pair.open_interest
+                        td id='td_signal'
+                            span class="table_signal"
+                            = pair.signal
         
 .tradingview-widget-container
   #tradingview_a0bd0

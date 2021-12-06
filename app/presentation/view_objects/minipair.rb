@@ -24,26 +24,42 @@ module Views
       @minipair.symbol
     end
 
+    def volume_change_percent
+      @minipair.volume_change_percent
+    end
+    
+    def signal
+      @minipair.signal
+    end
+    
     def time
       timestamp = @minipair.time
       Time.at(timestamp / 1000).utc.to_datetime
     end
-
-    def volume_now
-      @minipair.volume_now
-    end
-
-    def volume_change_24h
-      0.0
+    
+    def spot_volume
+      @minipair.spot_volume
     end
     
-    def increase_percent
-      @minipair.increase_percent
+    def spot_closeprice
+      @minipair.spot_closeprice
     end
-
-    def signal
-      @minipair.signal
+    
+    def funding_rate
+      @minipair.funding_rate
     end
-    # TODO: price movement direction
+    
+    def longshort_ratio
+      @minipair.longshort_ratio
+    end
+    
+    def open_interest
+      @minipair.open_interest
+    end
+    
+    def spot_change_percent
+      @minipair.spot_change_percent
+    end
+    
   end
 end
