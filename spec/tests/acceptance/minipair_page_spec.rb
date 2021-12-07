@@ -8,7 +8,7 @@ require_relative 'pages/minipair_index_page'
 describe 'Minipair Page Acceptance Tests' do
   include PageObject::PageFactory
   before do
-    DatabaseHelper.wipe_database
+    # DatabaseHelper.wipe_database
     # @headless = Headless.new
     @browser = Watir::Browser.new
   end
