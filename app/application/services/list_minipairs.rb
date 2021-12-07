@@ -7,40 +7,33 @@ module CryptoExpert
     # Retrieves array of all listed minipair signal entities
     class ListMiniPairs
       include Dry::Transaction
-      
-      # TODO: pair list service fix
-      
-      step :validate_list
-      step :list_minipair_signal
+
+      step :get_api_list
+      step :reify_list
       # step :view_minipair
 
       private
 
       NO_PAIR_ERR = 'Add a Mini Pair to get started'
       VIEW_PAIR_ERR = 'Can not make viewable pairs'
-
-      # Expects list of movies in input[:list_request]
-      def validate_list(input)
-        list_request = input[:list_request].call
-        if list_request.success?
-          Success(input.merge(list: list_request.value!))
-        else
-          Failure(list_request.failure)
-        end
+      
+      def get_api_list(minipair_list)
+        Gateway::Api.new(CryptoExpert::App.config)
+          .minipair_list(minipair_list)
+          .then do |result|
+            result.success? ? Success(result.payload) : Failure(result.message)
+          end
+      rescue StandardError
+        Failure('Could not access our API')
       end
 
-      def list_minipair_signal(input)
-        list = input[:list]
-        list.map do |pair|
-          Binance::MiniPairMapper.new(pair).get
-        end
-          .then { |minipairs| Response::MinipairsList.new(minipairs) }
-          .then { |list| Response::ApiResult.new(status: :ok, message: list) }
-          .then { |result| Success(result) }
-        # Success(Response::ApiResult.new(status: :created, message: minipairs))
-      rescue StandardError => e
-        puts e.backtrace.join("\n")
-        Failure(NO_PAIR_ERR)
+      def reify_list(minipair_json)
+        puts minipair_json
+        Representer::MiniPairList.new(OpenStruct.new)
+          .from_json(minipair_json)
+          .then { |minipairs| Success(minipairs) }
+      rescue StandardError
+        Failure('Could not parse response from API')
       end
 
       # def view_minipair(input)

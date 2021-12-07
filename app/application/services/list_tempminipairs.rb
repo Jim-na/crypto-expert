@@ -5,7 +5,7 @@ require 'dry/monads'
 module CryptoExpert
   module Service
     # Retrieves array of all listed project entities
-    class ListMiniPairs
+    class ListTempMiniPairs
       include Dry::Transaction
 
       step :list_minipair

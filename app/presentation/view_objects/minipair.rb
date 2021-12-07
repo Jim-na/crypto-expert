@@ -33,8 +33,7 @@ module Views
     end
     
     def time
-      timestamp = @minipair.time
-      Time.at(timestamp / 1000).utc.to_datetime
+      @minipair.time
     end
     
     def spot_volume

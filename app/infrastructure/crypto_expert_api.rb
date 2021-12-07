@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: build gateway from api layer
-
-# frozen_string_literal: true
-
 require_relative 'list_request'
 require 'http'
 

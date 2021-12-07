@@ -48,18 +48,31 @@ module CryptoExpert
             puts session[:watching]
             routing.redirect "minipair/#{symbol_request[:symbol]}"
           end
-          # TODO: pair list web render
-
-          # routing.get do
-          #   puts session[:watching]
-          #   viewable_minipairs_made = Service::ListMiniPairs.new.call(session[:watching])
-          #   if viewable_minipairs_made.failure?
-          #     flash[:error] = viewable_minipairs_made.failure
-          #     routing.redirect '/'
-          #   end
-          #   viewable_minipairs = viewable_minipairs_made.value!
-          #   view 'minipair_index', locals: { pairlist: viewable_minipairs }
-          # end
+          routing.get do
+            puts session[:watching]
+            result = Service::ListMiniPairs.new.call(session[:watching])
+            
+            # if viewable_minipairs_made.failure?
+            #   flash[:error] = viewable_minipairs_made.failure
+            #   routing.redirect '/'
+            # end
+            
+            if result.failure?
+              flash[:error] = result.failure
+              viewable_minipairs = []
+            else
+              minipairs = result.value!.minipairs
+              if minipairs.none?
+                flash.now[:notice] = 'Add a Github project to get started'
+              end
+    
+              session[:watching] = minipairs.map(&:fullname)
+              viewable_minipairs = Views::MiniPairList.new(minipairs)
+            end
+            
+            # viewable_minipairs = viewable_minipairs_made.value!
+            view 'minipair_index', locals: { pairlist: viewable_minipairs }
+          end
         end
 
         routing.on String do |symbol|
