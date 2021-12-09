@@ -20,7 +20,6 @@ module CryptoExpert
       def request_symbol(input)
         result = Gateway::Api.new(CryptoExpert::App.config)
           .get_minipair(input)
-        puts result
         result.success? ? Success(result.payload) : Failure(result.message)
       rescue StandardError => e
         puts e.inspect + '\n' + e.backtrace

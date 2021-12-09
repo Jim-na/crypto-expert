@@ -38,32 +38,26 @@ module CryptoExpert
             puts "req ",symbol_request[:symbol]
             minipair_made = Service::GetMiniPairSignal.new.call(symbol_request[:symbol])
             if minipair_made.failure?
-              puts "hi"
               flash[:error] = minipair_made.failure
               routing.redirect '/'
             end
             minipair = minipair_made.value!
-            # Still got bug when under "/minipair" to search another pair??
+            # TODO: when session has nil value , ex ['btcusdt',' '], it will cause api error(to bn)
+            # Or should we move session value to get method?
             session[:watching].insert(0, minipair.symbol).uniq!
-            puts session[:watching]
             routing.redirect "minipair/#{symbol_request[:symbol]}"
           end
           routing.get do
             puts session[:watching]
             result = Service::ListMiniPairs.new.call(session[:watching])
-            
-            # if viewable_minipairs_made.failure?
-            #   flash[:error] = viewable_minipairs_made.failure
-            #   routing.redirect '/'
-            # end
-            
             if result.failure?
               flash[:error] = result.failure
               viewable_minipairs = []
+              routing.redirect '/'
             else
               minipairs = result.value!.minipairs
               if minipairs.none?
-                flash.now[:notice] = 'Add a Github project to get started'
+                flash.now[:notice] = 'Add a minipair to get started'
               end
     
               session[:watching] = minipairs.map(&:fullname)
@@ -79,9 +73,7 @@ module CryptoExpert
           # GET /minipair/{symbol}
           routing.get do
             minipair_made = Service::GetMiniPairSignal.new.call(symbol)
-            puts minipair_made.value!
             minipair = Views::MiniPair.new(minipair_made.value!)
-            puts minipair
             view 'minipair', locals: { pair: minipair }
           end
         end

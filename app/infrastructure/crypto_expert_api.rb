@@ -2,6 +2,7 @@
 
 require_relative 'list_request'
 require 'http'
+require 'json'
 
 module CryptoExpert
   module Gateway
@@ -72,7 +73,7 @@ module CryptoExpert
         end
 
         def message
-          payload['message']
+          JSON.parse(payload)['message']
         end
 
         def payload

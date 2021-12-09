@@ -28,7 +28,6 @@ module CryptoExpert
       end
 
       def reify_list(minipair_json)
-        puts minipair_json
         Representer::MiniPairList.new(OpenStruct.new)
           .from_json(minipair_json)
           .then { |minipairs| Success(minipairs) }
