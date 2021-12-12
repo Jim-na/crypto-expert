@@ -24,21 +24,41 @@ module Views
       @minipair.symbol
     end
 
-    def time
-      timestamp = @minipair.time
-      Time.at(timestamp / 1000).utc.to_datetime
+    def volume_change_percent
+      @minipair.volume_change_percent
     end
-
-    def volume
-      @minipair.volume
-    end
-
-    def volume_change_24h
-      0.0
-    end
-
+    
     def signal
-      0
+      @minipair.signal
     end
+    
+    def time
+      @minipair.time
+    end
+    
+    def spot_volume
+      @minipair.spot_volume
+    end
+    
+    def spot_closeprice
+      @minipair.spot_closeprice
+    end
+    
+    def funding_rate
+      @minipair.funding_rate
+    end
+    
+    def longshort_ratio
+      @minipair.longshort_ratio
+    end
+    
+    def open_interest
+      @minipair.open_interest
+    end
+    
+    def spot_change_percent
+      @minipair.spot_change_percent
+    end
+    
   end
 end

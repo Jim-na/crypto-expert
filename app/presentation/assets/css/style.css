@@ -138,3 +138,8 @@ a.btn {
 .active-cyan-2 .fa {
   color: #4dd0e1;
 }
+
+.signal_table {
+  font-size: medium;
+  color: grey;
+}
