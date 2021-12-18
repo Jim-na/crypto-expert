@@ -21,14 +21,14 @@ a {
   text-decoration: none;
 }
 
-.pair-table{
+.pair-table {
   box-shadow: 0px 0px 20px rgb(0 0 0 / 15%);
-  background-color:white;
+  background-color: white;
   padding: 20px;
 }
-@media(max-width:1000px){
-  .pair-table{
-      display:none
+@media (max-width: 1000px) {
+  .pair-table {
+    display: none;
   }
 }
 
@@ -142,4 +142,24 @@ a.btn {
 .signal_table {
   font-size: medium;
   color: grey;
+  overflow-x: auto;
+}
+.tradingview-widget-container {
+  height: 500;
+}
+.pair_info {
+  padding-top: 3px;
+  margin-top: 20px;
+}
+p span {
+  margin-top: 20px;
+}
+.row {
+  margin-top: 10px;
+}
+.jumbotron {
+  padding-top: 20px;
+}
+.badge {
+  margin-left: 5px;
 }
