@@ -23,6 +23,11 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
 end
 
+# Asynchronicity
+gem 'concurrent-ruby', '~> 1.1'
+gem 'aws-sdk-sqs', '~> 1.48'
+gem 'shoryuken', '~> 5.3'
+
 # Web Application
 gem 'puma', '~> 5.5'
 gem 'roda', '~> 3.49'
