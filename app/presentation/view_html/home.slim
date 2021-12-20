@@ -3,30 +3,49 @@
     .row
       .col-sm-4
         h5
-          | Target Major Pair
+          | Target Bull Pair
         li
-          a[href="minipair/MANAUSDT"] BTCUSDT
+          a[href="minipair/BTCUSDT"] BTCUSDT
         li
           |  ETHUSDT 
         li
           |  SOLUSDT 
       .col-sm-4
         h5
-          | Target Mini Pair
+          | Target Bear Pair
         li
           a[href="minipair/MANAUSDT"] MANAUSDT 
         li
           |  MBOXUSDT 
         li
           |  OMGUSDT 
-      .col-sm-4
-        h5
-          | Target KOL 
-        li
-          |  The BULL 
-        li
-          |  Rose 
-        li
-          |  Benson 
-.container 
-
+.container
+    - if pairlist.any?
+      div class="pairtable"
+        table class="table table-hover pair-table" id="sortable"
+          thead
+            tr
+              th Symbol
+              th Volume Change %
+              th Spot Change %
+              th Funding Rate
+              th L/S Ratio
+              th Open Interest
+              th Signal
+          tbody
+            - pairlist.each do |pair|
+              tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
+                td
+                    a [href = "minipair/#{pair.symbol}"] #{pair.symbol}
+                td
+                  | #{'%.2f' % pair.volume_change_percent} 
+                td 
+                  | #{'%.2f' % pair.spot_change_percent}
+                td
+                  | #{'%.5f' %pair.funding_rate}
+                td 
+                  | #{'%.2f' % pair.longshort_ratio}
+                td 
+                  | #{'%.2f' % pair.open_interest}
+                td 
+                  | #{pair.signal}

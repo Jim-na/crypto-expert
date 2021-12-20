@@ -56,6 +56,18 @@ module Views
       @minipair.open_interest
     end
     
+    def funding_rate_history
+      @minipair.funding_rate_history
+    end
+    
+    def longshort_ratio_history
+      @minipair.longshort_ratio_history
+    end
+    
+    def open_interest_history
+      @minipair.open_interest_history
+    end
+    
     def spot_change_percent
       @minipair.spot_change_percent
     end

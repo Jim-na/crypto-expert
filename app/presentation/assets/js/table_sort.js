@@ -1,13 +1,17 @@
 $(document).ready(function () {
-  var table = $("#sortable").DataTable({
+  console.log(JSON.stringify($("#sortable").text()));
+
+  table = $("#sortable").DataTable({
+    // ordering: true,
+    order: [2, "desc"],
     initComplete: function (settings, json) {},
     language: {
       sProcessing: "Processing.",
       sLengthMenu: "show _MENU_ records",
       sZeroRecords: "none record",
-      sInfo: "show No. _START_ to NO. _END_ ，Total _TOTAL_ records",
+      sInfo: "No._START_ - No._END_, total _TOTAL_ records",
       sInfoEmpty: "show 0 to 0 records，total: 0",
-      sInfoFiltered: "(由 _MAX_ 項結果過濾)",
+      sInfoFiltered: "(filter _MAX_ results)",
       sInfoPostFix: "",
       sSearch: "search:",
       sUrl: "",
@@ -20,12 +24,9 @@ $(document).ready(function () {
         sNext: "Next",
         sLast: "Last",
       },
-      oAria: {
-        sSortAscending: ": in increasing order",
-        sSortDescending: ": in decreasing order",
-      },
     },
     buttons: ["copy", "excel", "colvis"],
   });
+
   table.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
 });

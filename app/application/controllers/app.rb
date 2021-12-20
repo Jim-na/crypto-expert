@@ -22,11 +22,25 @@ module CryptoExpert
 
       routing.root do
         session[:watching] ||= []
+        puts session[:watching].compact
+        result = Service::ListMiniPairs.new.call(session[:watching].compact)
+        if result.failure?
+          flash[:error] = result.failure
+          viewable_minipairs = []
+          routing.redirect '/'
+        else
+          minipairs = result.value!.minipairs
+          if minipairs.none?
+            flash.now[:notice] = 'Add a minipair to get started'
+          end
+          # session[:watching] = minipairs.map(&:fullname)
+          viewable_minipairs = Views::MiniPairList.new(minipairs)
+        end
+        
+        # viewable_minipairs = viewable_minipairs_made.value!
+        view 'home', locals: { pairlist: viewable_minipairs }
         # puts pairlist
-        view 'home'
-      end
-      routing.on 'kol' do
-        view 'home'
+        # view 'home'
       end
 
       routing.on 'minipair' do
@@ -42,14 +56,15 @@ module CryptoExpert
               routing.redirect '/'
             end
             minipair = minipair_made.value!
-            # TODO: when session has nil value , ex ['btcusdt',' '], it will cause api error(to bn)
             # Or should we move session value to get method?
+            puts minipair
             session[:watching].insert(0, minipair.symbol).uniq!
+            # puts "post",session[:watching]
             routing.redirect "minipair/#{symbol_request[:symbol]}"
           end
           routing.get do
-            puts session[:watching]
-            result = Service::ListMiniPairs.new.call(session[:watching])
+            puts session[:watching].compact
+            result = Service::ListMiniPairs.new.call(session[:watching].compact)
             if result.failure?
               flash[:error] = result.failure
               viewable_minipairs = []
@@ -59,8 +74,7 @@ module CryptoExpert
               if minipairs.none?
                 flash.now[:notice] = 'Add a minipair to get started'
               end
-    
-              session[:watching] = minipairs.map(&:fullname)
+              # session[:watching] = minipairs.map(&:fullname)
               viewable_minipairs = Views::MiniPairList.new(minipairs)
             end
             
