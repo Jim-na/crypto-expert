@@ -32,6 +32,10 @@ module Views
       @minipair.signal
     end
     
+    def signal_score
+      @minipair.signal_score
+    end
+    
     def time
       @minipair.time
     end

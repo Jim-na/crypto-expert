@@ -63,6 +63,7 @@ module CryptoExpert
             routing.redirect "minipair/#{symbol_request[:symbol]}"
           end
           routing.get do
+            # TODO: add a newpage to get sorted signal list
             puts session[:watching].compact
             result = Service::ListMiniPairs.new.call(session[:watching].compact)
             if result.failure?
