@@ -27,54 +27,53 @@ module Views
     def volume_change_percent
       @minipair.volume_change_percent
     end
-    
+
     def signal
       @minipair.signal
     end
-    
+
     def signal_score
       @minipair.signal_score
     end
-    
+
     def time
       @minipair.time
     end
-    
+
     def spot_volume
       @minipair.spot_volume
     end
-    
+
     def spot_closeprice
       @minipair.spot_closeprice
     end
-    
+
     def funding_rate
       @minipair.funding_rate
     end
-    
+
     def longshort_ratio
       @minipair.longshort_ratio
     end
-    
+
     def open_interest
       @minipair.open_interest
     end
-    
+
     def funding_rate_history
       @minipair.funding_rate_history
     end
-    
+
     def longshort_ratio_history
       @minipair.longshort_ratio_history
     end
-    
+
     def open_interest_history
       @minipair.open_interest_history
     end
-    
+
     def spot_change_percent
       @minipair.spot_change_percent
     end
-    
   end
 end

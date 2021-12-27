@@ -20,7 +20,7 @@ module CryptoExpert
       def minipair_list(list)
         @request.minipair_list(list)
       end
-      
+
       def sortedpair_list
         @request.sortedpair_list
       end
@@ -44,13 +44,13 @@ module CryptoExpert
           call_api('get', ['minipair'],
                    'list' => Value::WatchedList.to_encoded(list))
         end
-        
+
         def get_minipair(symbol)
-            call_api('post', ['minipair', symbol])
+          call_api('post', ['minipair', symbol])
         end
-        
+
         def sortedpair_list
-          call_api('get', ['sortedpair', nil ])
+          call_api('get', ['sortedpair', nil])
         end
 
         private
@@ -62,11 +62,11 @@ module CryptoExpert
 
         def call_api(method, resources = [], params = {})
           api_path = resources.empty? ? @api_host : @api_root
-          if resources[0]== 'sortedpair'
-            url = api_path + '/' + resources[0]
-          else
-            url = [api_path, resources].flatten.join('/') + params_str(params)
-          end
+          url = if resources[0] == 'sortedpair'
+                  api_path + '/' + resources[0]
+                else
+                  [api_path, resources].flatten.join('/') + params_str(params)
+                end
           # puts url
           HTTP.headers('Accept' => 'application/json').send(method, url)
             .then { |http_response| Response.new(http_response) }
@@ -79,7 +79,7 @@ module CryptoExpert
       class Response < SimpleDelegator
         NotFound = Class.new(StandardError)
 
-        SUCCESS_CODES = (200..299).freeze
+        SUCCESS_CODES = (200..299)
 
         def success?
           code.between?(SUCCESS_CODES.first, SUCCESS_CODES.last)

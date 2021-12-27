@@ -16,7 +16,7 @@ module CryptoExpert
 
       NO_PAIR_ERR = 'Add a Mini Pair to get started'
       VIEW_PAIR_ERR = 'Can not make viewable pairs'
-      
+
       def get_api_list(minipair_list)
         Gateway::Api.new(CryptoExpert::App.config)
           .minipair_list(minipair_list)
@@ -42,7 +42,6 @@ module CryptoExpert
       #   puts e.backtrace.join("\n")
       #   Failure(VIEW_PAIR_ERR)
       # end
-      
     end
   end
 end

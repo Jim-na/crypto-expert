@@ -15,9 +15,9 @@ module CryptoExpert
 
       def get_minipair(input)
         minipair = Binance::TempMiniPairMapper
-        .new(App.config.BINANCE_API_KEY)
-        .get(input)
-        
+          .new(App.config.BINANCE_API_KEY)
+          .get(input)
+
         Success(minipair)
       rescue StandardError
         Failure('Could not find this pair')
@@ -31,7 +31,6 @@ module CryptoExpert
         puts e.backtrace.join("\n")
         Failure('Could not add minipair into database')
       end
-
     end
   end
 end
