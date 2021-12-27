@@ -45,7 +45,6 @@ module CryptoExpert
       
       routing.on 'sortedpair' do
         routing.is do
-          # TODO: add a newpage to get sorted signal list
           routing.get do
             puts session[:watching].compact
             result = Service::ListSortedPairs.new.call()

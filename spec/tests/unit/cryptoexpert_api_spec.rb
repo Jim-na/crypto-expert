@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# TODO: should we add new test for new api sortedpair?
 require_relative '../../helpers/spec_helper.rb'
 
 describe 'Unit test of CryptoExpert API gateway' do

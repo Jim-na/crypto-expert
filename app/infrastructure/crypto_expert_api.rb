@@ -67,7 +67,7 @@ module CryptoExpert
           else
             url = [api_path, resources].flatten.join('/') + params_str(params)
           end
-          puts url
+          # puts url
           HTTP.headers('Accept' => 'application/json').send(method, url)
             .then { |http_response| Response.new(http_response) }
         rescue StandardError
