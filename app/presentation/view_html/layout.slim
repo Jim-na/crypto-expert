@@ -62,14 +62,14 @@ html
           #navbarSupportedContent.collapse.navbar-collapse
             ul.nav.navbar-nav.mr-auto.justify-content-end.nav-pills
               li
-                a#nav_mini.nav-link.active[href="/minipair/BTCUSDT"]
-                  |  BTCUSDT
-              li
-                a#nav_mini.nav-link[href="/minipair/ETHUSDT"]
-                  |  ETHUSDT
-              li
-                a#nav_mini.nav-link[href="/minipair/BNBUSDT"]
-                  |  BNBUSDT
+                a#nav_mini.nav-link.active[href="/sortedpair"]
+                  |  Recommendation 
+              / li
+              /   a#nav_mini.nav-link[href="/minipair/ETHUSDT"]
+              /     |  ETHUSDT
+              / li
+              /   a#nav_mini.nav-link[href="/minipair/BNBUSDT"]
+              /     |  BNBUSDT
             form#show-minipair-form.form-inline.d-flex.md-form.form-sm.active-cyan.active-cyan-2.mt-2[action="/minipair" method="POST"]
               .md-form.my-0
                 i.fas.fa-search.text-white[aria-hidden="true"]

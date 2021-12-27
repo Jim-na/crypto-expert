@@ -46,6 +46,25 @@ module CryptoExpert
       routing.on 'sortedpair' do
         routing.is do
           # TODO: add a newpage to get sorted signal list
+          routing.get do
+            puts session[:watching].compact
+            result = Service::ListSortedPairs.new.call()
+            if result.failure?
+              flash[:error] = result.failure
+              viewable_minipairs = []
+              routing.redirect '/'
+            else
+              minipairs = result.value!.minipairs
+              if minipairs.none?
+                flash.now[:notice] = 'Add a minipair to get started'
+              end
+              # session[:watching] = minipairs.map(&:fullname)
+              viewable_minipairs = Views::MiniPairList.new(minipairs)
+            end
+            
+            # viewable_minipairs = viewable_minipairs_made.value!
+            view 'sorted_signal', locals: { pairlist: viewable_minipairs }
+          end
         end
       end
       routing.on 'minipair' do

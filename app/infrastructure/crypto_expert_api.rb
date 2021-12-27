@@ -20,6 +20,10 @@ module CryptoExpert
       def minipair_list(list)
         @request.minipair_list(list)
       end
+      
+      def sortedpair_list
+        @request.sortedpair_list
+      end
 
       def get_minipair(symbol)
         @request.get_minipair(symbol)
@@ -44,6 +48,10 @@ module CryptoExpert
         def get_minipair(symbol)
             call_api('post', ['minipair', symbol])
         end
+        
+        def sortedpair_list
+          call_api('get', ['sortedpair', nil ])
+        end
 
         private
 
@@ -54,7 +62,12 @@ module CryptoExpert
 
         def call_api(method, resources = [], params = {})
           api_path = resources.empty? ? @api_host : @api_root
-          url = [api_path, resources].flatten.join('/') + params_str(params)
+          if resources[0]== 'sortedpair'
+            url = api_path + '/' + resources[0]
+          else
+            url = [api_path, resources].flatten.join('/') + params_str(params)
+          end
+          puts url
           HTTP.headers('Accept' => 'application/json').send(method, url)
             .then { |http_response| Response.new(http_response) }
         rescue StandardError

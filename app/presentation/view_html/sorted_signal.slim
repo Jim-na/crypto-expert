@@ -1,0 +1,35 @@
+.container
+  .jumbotron.text-left.col-sm-12
+    .row
+      h5
+        | This is our cryptocurrency recommendation list.
+.container
+    - if pairlist.any?
+      div class="pairtable col-sm-12"
+        table class="table table-hover pair-table" id="sortable"
+          thead
+            tr
+              th Symbol
+              th Volume Change %
+              th Spot Change %
+              th Funding Rate
+              th L/S Ratio
+              th Open Interest
+              th Signal
+          tbody
+            - pairlist.each do |pair|
+              tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
+                td
+                    a [href = "minipair/#{pair.symbol}"] #{pair.symbol}
+                td
+                  | #{'%.2f' % pair.volume_change_percent} 
+                td 
+                  | #{'%.2f' % pair.spot_change_percent}
+                td
+                  | #{'%.5f' %pair.funding_rate}
+                td 
+                  | #{'%.2f' % pair.longshort_ratio}
+                td 
+                  | #{'%.2f' % pair.open_interest}
+                td 
+                  | #{pair.signal}
