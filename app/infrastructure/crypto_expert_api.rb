@@ -33,7 +33,7 @@ module CryptoExpert
       class Request
         def initialize(config)
           @api_host = config.API_HOST
-          @api_root = config.API_HOST + '/api/v1'
+          @api_root = "#{config.API_HOST}/api/v1"
         end
 
         def get_root # rubocop:disable Naming/AccessorMethodName
@@ -57,13 +57,13 @@ module CryptoExpert
 
         def params_str(params)
           params.map { |key, value| "#{key}=#{value}" }.join('&')
-            .then { |str| str ? '?' + str : '' }
+            .then { |str| str ? "?#{str}" : '' }
         end
 
         def call_api(method, resources = [], params = {})
           api_path = resources.empty? ? @api_host : @api_root
           url = if resources[0] == 'sortedpair'
-                  api_path + '/' + resources[0]
+                  "#{api_path}/#{resources[0]}"
                 else
                   [api_path, resources].flatten.join('/') + params_str(params)
                 end
