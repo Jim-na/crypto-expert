@@ -30,7 +30,7 @@ module CryptoExpert
           routing.redirect '/'
         else
           minipairs = result.value!.minipairs
-          flash.now[:notice] = 'Add a minipair to get started' if minipairs.none?
+          flash.now[:notice] = 'Add a minipair to get started or go check recommendation list' if minipairs.none?
           # session[:watching] = minipairs.map(&:fullname)
           viewable_minipairs = Views::MiniPairList.new(minipairs)
         end
@@ -40,7 +40,7 @@ module CryptoExpert
         # puts pairlist
         # view 'home'
       end
-
+      # TODO: This service takes too long , maybe need some hint for user to wait
       routing.on 'sortedpair' do
         routing.is do
           routing.get do
