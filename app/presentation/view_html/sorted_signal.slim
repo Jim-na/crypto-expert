@@ -16,7 +16,9 @@
               th Funding Rate
               th L/S Ratio
               th Open Interest
-              th Signal
+              th signal score
+              th [data-field="date" data-filter-control="select" data-sortable="true"] 
+                |Signal
           tbody
             - pairlist.each do |pair|
               tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
@@ -32,5 +34,7 @@
                   | #{'%.2f' % pair.longshort_ratio}
                 td 
                   | #{'%.2f' % pair.open_interest}
+                td 
+                  | #{'%.2f' % pair.signal_score}
                 td 
                   | #{pair.signal}
