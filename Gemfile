@@ -10,6 +10,11 @@ group :production do
   gem 'pg'
 end
 
+# Caching
+gem 'rack-cache', '~> 1.13'
+gem 'redis', '~> 4.5'
+gem 'redis-rack-cache', '~> 2.2'
+
 # PRESENTATION LAYER
 gem 'multi_json', '~> 1.15'
 gem 'roar', '~> 1.1'
@@ -26,7 +31,7 @@ end
 # Asynchronicity
 gem 'aws-sdk-sqs', '~> 1.48'
 gem 'concurrent-ruby', '~> 1.1'
-gem 'shoryuken', '~> 5.3'
+# gem 'shoryuken', '~> 5.3'
 
 # Web Application
 gem 'puma', '~> 5.5'

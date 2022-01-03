@@ -10,6 +10,7 @@ module CryptoExpert
     plugin :halt
     plugin :flash
     plugin :all_verbs # recognizes HTTP verbs beyond GET/POST (e.g., DELETE)
+    plugin :caching
     plugin :render, engine: 'slim', views: 'app/presentation/view_html'
     # plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
@@ -58,6 +59,8 @@ module CryptoExpert
             end
 
             # viewable_minipairs = viewable_minipairs_made.value!
+            # TODO: Cache didn't work?? this may fail (reponse has no varaible pair??)
+            response.expires 6000, public: true
             view 'sorted_signal', locals: { pairlist: viewable_minipairs }
           end
         end
@@ -80,23 +83,6 @@ module CryptoExpert
             session[:watching].insert(0, minipair.symbol).uniq!
             # puts "post",session[:watching]
             routing.redirect "minipair/#{symbol_request[:symbol]}"
-          end
-          routing.get do
-            puts session[:watching].compact
-            result = Service::ListMiniPairs.new.call(session[:watching].compact)
-            if result.failure?
-              flash[:error] = result.failure
-              viewable_minipairs = []
-              routing.redirect '/'
-            else
-              minipairs = result.value!.minipairs
-              flash.now[:notice] = 'Add a minipair to get started' if minipairs.none?
-              # session[:watching] = minipairs.map(&:fullname)
-              viewable_minipairs = Views::MiniPairList.new(minipairs)
-            end
-
-            # viewable_minipairs = viewable_minipairs_made.value!
-            view 'minipair_index', locals: { pairlist: viewable_minipairs }
           end
         end
 
