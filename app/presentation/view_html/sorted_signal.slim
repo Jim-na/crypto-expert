@@ -1,13 +1,23 @@
-/ TODO: frontend design change?
+/ TODO: frontend design change? [data-field="date" data-filter-control="select" data-sortable="true"] 
 .container
-  .jumbotron.text-left.col-sm-12
+  .jumbotron.text-left.col-sm-12 style="padding-top:30px;padding-bottom:15px"
     .row
-      h5
-        | This is our cryptocurrency recommendation list.
+      h4
+        | Recommendation list.
+    .row style="padding-left:20px"
+      text 
+        | Data from Binance:
+        li 
+          | spot data: volume change % ,price change % 
+        li  
+          | perpetual futures data: funding rate history, long/short ratio, open interest
+    .row style="padding-bottom:20px"
+      text
+        | We take all the spot and futures data into account, calculating the signals.
 .container
     - if pairlist.any?
       div class="pairtable col-sm-12"
-        table class="table table-hover pair-table" id="sortable"
+        table.table-responsive-lg class="table table-hover pair-table col-sm-12" id="sortable"
           thead
             tr
               th Symbol
@@ -15,10 +25,8 @@
               th Spot Change %
               th Funding Rate
               th L/S Ratio
-              th Open Interest
-              th signal score
-              th [data-field="date" data-filter-control="select" data-sortable="true"] 
-                |Signal
+              th Open Interest 
+              th Signal
           tbody
             - pairlist.each do |pair|
               tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
@@ -34,7 +42,5 @@
                   | #{'%.2f' % pair.longshort_ratio}
                 td 
                   | #{'%.2f' % pair.open_interest}
-                td 
-                  | #{'%.2f' % pair.signal_score}
                 td 
                   | #{pair.signal}

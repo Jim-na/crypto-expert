@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  console.log(JSON.stringify($("#sortable").text()));
+  // console.log(JSON.stringify($("#sortable").text()));
 
   table = $("#sortable").DataTable({
     // ordering: true,

@@ -1,32 +1,31 @@
 / TODO: frontend design change?
 .container
-  .jumbotron.text-left.col-sm-12
+  .jumbotron.col-sm-12 style="padding-top:30px;padding-bottom:30px"
     .row
-      .col-sm-4
-        h5
-          | Target Bull Pair
+      .col-sm-3
+        h4
+          | Market Cap
+      .col-sm-9
         li
           a[href="minipair/BTCUSDT"] BTCUSDT
         li
-          |  ETHUSDT 
+          a[href="minipair/ETHUSDT"] ETHUSDT
         li
-          |  SOLUSDT 
-      .col-sm-4
-        h5
-          | Target Bear Pair
+          a[href="minipair/SOLUSDT"] SOLUSDT 
         li
-          a[href="minipair/MANAUSDT"] MANAUSDT 
+          a[href="minipair/ADAUSDT"] ADAUSDT 
         li
-          |  MBOXUSDT 
+          a[href="minipair/XRPUSDT"] XRPUSDT 
         li
-          |  OMGUSDT 
+          a[href="minipair/LUNAUSDT"] LUNAUSDT 
 .container
     - if pairlist.any?
       div class="pairtable col-sm-12"
-        table class="table table-hover pair-table" id="sortable"
+        table.table-responsive-lg class="table table-hover pair-table col-sm-12" id="sortable"
           thead
             tr
               th Symbol
+              th
               th Volume Change %
               th Spot Change %
               th Funding Rate
@@ -38,7 +37,7 @@
               tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
                 td
                     a [href = "minipair/#{pair.symbol}"] #{pair.symbol}
-                td
+                td 
                   | #{'%.2f' % pair.volume_change_percent} 
                 td 
                   | #{'%.2f' % pair.spot_change_percent}
