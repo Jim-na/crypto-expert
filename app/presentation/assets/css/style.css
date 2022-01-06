@@ -135,7 +135,7 @@ p span {
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: rgb(92, 141, 190); /*#428bca;*/
-  color: rgb(215, 243, 243);
+  color: rgb(225, 245, 245);
 }
 .jumbotron h4 {
   color: #fff;
@@ -147,7 +147,7 @@ p span {
   color: #fff;
 }
 .jumbotron li {
-  color: rgb(215, 243, 243);
+  color: rgb(225, 245, 245);
 }
 .jumbotron a {
   color: rgb(206, 237, 250);

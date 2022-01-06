@@ -13,7 +13,7 @@ $(document).ready(function () {
       sInfoEmpty: "show 0 to 0 records，total: 0",
       sInfoFiltered: "(filter _MAX_ results)",
       sInfoPostFix: "",
-      sSearch: "search:",
+      sSearch: "search table:",
       sUrl: "",
       sEmptyTable: "no data",
       sLoadingRecords: "Loading...",
