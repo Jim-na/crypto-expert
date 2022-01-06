@@ -80,8 +80,8 @@ a.nav-link {
   border-color: #428bca;
 }
 
-th:nth-child(even),
-td:nth-child(even) {
+th,
+td {
   text-align: center;
 }
 
@@ -101,13 +101,14 @@ rgb(148, 20, 20)
 .bear {
   color: rgb(238, 113, 109);
 }
-/* .table a {
-  color: grey;
+/* .table {
+  text-align: center;
 } */
 a.btn {
   color: #fff !important;
 }
 
+/* navbar */
 .active-cyan-2 input.form-control[type="text"]:focus:not([readonly]) {
   border-bottom: 1px solid #4dd0e1;
   box-shadow: 0 1px 0 0 #4dd0e1;
@@ -164,6 +165,9 @@ p span {
 }
 
 /*img */
-.col-sm-2 img {
-  width: 60px;
+.col-lg-2.col-md-2 {
+  text-align: center;
+}
+.col-sm-2 {
+  text-align: left;
 }
