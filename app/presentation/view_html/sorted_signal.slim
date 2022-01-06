@@ -6,13 +6,13 @@
         | Recommendation list.
     .row style="padding-left:20px"
       text 
-        | Data from Binance:
+        | Data from Binance: (4h)
         li 
           | spot data: volume change % ,price change % 
         li  
           | perpetual futures data: funding rate history, long/short ratio, open interest
     .row style="padding-bottom:20px"
-      text
+      h6
         | We take all the spot and futures data into account, calculating the signals.
 .container
     - if pairlist.any?

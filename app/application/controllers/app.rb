@@ -14,13 +14,17 @@ module CryptoExpert
     plugin :render, engine: 'slim', views: 'app/presentation/view_html'
     # plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
-                    css: 'style.css', js: 'table_sort.js'
-
+                    css: 'style.css', js: ['table_sort.js','table_color.js']
+    
+    opts[:root] = 'app/presentation/assets/'
+    plugin :public, root: 'img'              
+                    
     use Rack::MethodOverride # for other HTTP verbs (with plugin all_verbs)
 
     route do |routing|
       routing.assets # load CSS and js
-
+      routing.public
+      
       routing.root do
         session[:watching] ||= []
         puts session[:watching].compact

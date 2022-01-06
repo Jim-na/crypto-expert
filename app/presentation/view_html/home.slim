@@ -1,23 +1,26 @@
 / TODO: frontend design change?
 .container
-  .jumbotron.col-sm-12 style="padding-top:30px;padding-bottom:30px"
+  .jumbotron.col-sm-12 style="background:transparent !important padding-top:30px;padding-bottom:30px"
     .row
-      .col-sm-3
+      .col-sm-12
         h4
           | Market Cap
-      .col-sm-9
-        li
-          a[href="minipair/BTCUSDT"] BTCUSDT
-        li
-          a[href="minipair/ETHUSDT"] ETHUSDT
-        li
-          a[href="minipair/SOLUSDT"] SOLUSDT 
-        li
-          a[href="minipair/ADAUSDT"] ADAUSDT 
-        li
-          a[href="minipair/XRPUSDT"] XRPUSDT 
-        li
-          a[href="minipair/LUNAUSDT"] LUNAUSDT 
+    .row
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/BTCUSDT"] 
+          img.mr-3.mt-3.rounded-circle[src="/btc.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/ETHUSDT"]
+          img.mr-3.mt-3.rounded-circle[src="/eth.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/SOLUSDT"] 
+          img.mr-3.mt-3.rounded-circle[src="/sol.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/ADAUSDT"]
+          img.mr-3.mt-3.rounded-circle[src="/ada.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/XRPUSDT"] 
+          img.mr-3.mt-3.rounded-circle[src="/xrp.png" style="width:60px;"]
 .container
     - if pairlist.any?
       div class="pairtable col-sm-12"
@@ -26,8 +29,9 @@
             tr
               th Symbol
               th
-              th Volume Change %
-              th Spot Change %
+                | Volume Change % 
+              th[data-cell-style="displaycolor" id="spot_change"] 
+                |Spot Change %
               th Funding Rate
               th L/S Ratio
               th Open Interest
@@ -49,3 +53,5 @@
                   | #{'%.2f' % pair.open_interest}
                 td 
                   | #{pair.signal}
+              /[data-field="report_state" data-sortable="true" data-formatter="displaycolor"]
+                  

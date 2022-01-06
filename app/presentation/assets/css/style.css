@@ -80,6 +80,30 @@ a.nav-link {
   border-color: #428bca;
 }
 
+th:nth-child(even),
+td:nth-child(even) {
+  text-align: center;
+}
+
+/* .pos {
+  color: rgb(134, 209, 134);
+} */
+/*
+rgb(40, 145, 40);
+rgb(148, 20, 20)
+*/
+.neg {
+  color: rgb(238, 113, 109);
+}
+.bull {
+  color: rgb(134, 209, 134);
+}
+.bear {
+  color: rgb(238, 113, 109);
+}
+/* .table a {
+  color: grey;
+} */
 a.btn {
   color: #fff !important;
 }
@@ -109,7 +133,26 @@ p span {
 }
 .jumbotron {
   padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: rgb(92, 141, 190); /*#428bca;*/
+  color: rgb(215, 243, 243);
 }
+.jumbotron h4 {
+  color: #fff;
+}
+.jumbotron h5 {
+  color: #fff;
+}
+.jumbotron h6 {
+  color: #fff;
+}
+.jumbotron li {
+  color: rgb(215, 243, 243);
+}
+.jumbotron a {
+  color: rgb(206, 237, 250);
+}
+
 .badge {
   margin-left: 5px;
 }
@@ -118,4 +161,9 @@ p span {
   /* position: absolute; */
   height: 100%;
   min-height: 300px;
+}
+
+/*img */
+.col-sm-2 img {
+  width: 60px;
 }
