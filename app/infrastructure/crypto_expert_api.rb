@@ -10,6 +10,8 @@ module CryptoExpert
     class Api
       def initialize(config)
         @config = config
+        puts "CONFIG : API_HOST"
+        puts config.API_HOST
         @request = Request.new(@config)
       end
 
