@@ -30,8 +30,6 @@ module CryptoExpert
         puts session[:watching].compact
         result = Service::ListMiniPairs.new.call(session[:watching].compact)
         if result.failure?
-          puts "List MiniPairs Failure!!!"
-          puts result.failure
           flash[:error] = result.failure
           viewable_minipairs = []
           routing.redirect '/'
@@ -44,7 +42,7 @@ module CryptoExpert
 
         # viewable_minipairs = viewable_minipairs_made.value!
         view 'home', locals: { pairlist: viewable_minipairs }
-        puts pairlist
+        # puts pairlist
         # view 'home'
       end
       # TODO: This service takes too long , maybe need some hint for user to wait
