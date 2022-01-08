@@ -1,4 +1,5 @@
 config/secrets.yml
+config/secrets_old.yml
 spec/test.rb
 spec/coverage/
 coverage/*
