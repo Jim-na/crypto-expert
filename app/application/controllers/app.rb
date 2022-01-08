@@ -30,6 +30,7 @@ module CryptoExpert
         puts session[:watching].compact
         result = Service::ListMiniPairs.new.call(session[:watching].compact)
         if result.failure?
+          puts "List MiniPairs Failure!!!"
           flash[:error] = result.failure
           viewable_minipairs = []
           routing.redirect '/'
