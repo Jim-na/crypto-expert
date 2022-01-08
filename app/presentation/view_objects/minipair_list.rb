@@ -18,7 +18,7 @@ module Views
     end
 
     def list
-      @minipair.map{|minipair| minipair.symbol}
+      @minipair.map { |minipair| minipair.symbol }
     end
   end
 end

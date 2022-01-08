@@ -5,7 +5,7 @@ require 'dry/monads'
 module CryptoExpert
   module Service
     # Retrieves array of all listed minipair signal entities
-    class ListMiniPairs
+    class ListSortedPairs
       include Dry::Transaction
 
       step :get_api_list
@@ -17,9 +17,9 @@ module CryptoExpert
       NO_PAIR_ERR = 'Add a Mini Pair to get started'
       VIEW_PAIR_ERR = 'Can not make viewable pairs'
 
-      def get_api_list(minipair_list)
+      def get_api_list
         Gateway::Api.new(CryptoExpert::App.config)
-          .minipair_list(minipair_list)
+          .sortedpair_list
           .then do |result|
             result.success? ? Success(result.payload) : Failure(result.message)
           end

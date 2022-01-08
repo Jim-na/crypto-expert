@@ -80,10 +80,35 @@ a.nav-link {
   border-color: #428bca;
 }
 
+th,
+td {
+  text-align: center;
+}
+
+/* .pos {
+  color: rgb(134, 209, 134);
+} */
+/*
+rgb(40, 145, 40);
+rgb(148, 20, 20)
+*/
+.neg {
+  color: rgb(238, 113, 109);
+}
+.bull {
+  color: rgb(134, 209, 134);
+}
+.bear {
+  color: rgb(238, 113, 109);
+}
+/* .table {
+  text-align: center;
+} */
 a.btn {
   color: #fff !important;
 }
 
+/* navbar */
 .active-cyan-2 input.form-control[type="text"]:focus:not([readonly]) {
   border-bottom: 1px solid #4dd0e1;
   box-shadow: 0 1px 0 0 #4dd0e1;
@@ -109,7 +134,26 @@ p span {
 }
 .jumbotron {
   padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: rgb(92, 141, 190); /*#428bca;*/
+  color: rgb(225, 245, 245);
 }
+.jumbotron h4 {
+  color: #fff;
+}
+.jumbotron h5 {
+  color: #fff;
+}
+.jumbotron h6 {
+  color: #fff;
+}
+.jumbotron li {
+  color: rgb(225, 245, 245);
+}
+.jumbotron a {
+  color: rgb(206, 237, 250);
+}
+
 .badge {
   margin-left: 5px;
 }
@@ -118,4 +162,12 @@ p span {
   /* position: absolute; */
   height: 100%;
   min-height: 300px;
+}
+
+/*img */
+.col-lg-2.col-md-2 {
+  text-align: center;
+}
+.col-sm-2 {
+  text-align: left;
 }

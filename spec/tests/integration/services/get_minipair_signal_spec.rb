@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../../../helpers/spec_helper.rb'
+require_relative '../../../helpers/spec_helper'
 describe 'Integration test of get minipair service and API gateway' do
     it 'must get the minipair signal' do
-      input = {symbol: MINI_SYMBOL}
+    input = { symbol: MINI_SYMBOL }
       symbol_request = CryptoExpert::Forms::NewSymbol.new.call(input)
       
       # WHEN we request to add a project

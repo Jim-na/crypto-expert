@@ -1,33 +1,40 @@
+/ TODO: frontend design change?
 .container
-  .jumbotron.text-left
+  .jumbotron.col-sm-12 style="background:transparent !important padding-top:30px;padding-bottom:30px"
     .row
-      .col-sm-4
-        h5
-          | Target Bull Pair
-        li
-          a[href="minipair/BTCUSDT"] BTCUSDT
-        li
-          |  ETHUSDT 
-        li
-          |  SOLUSDT 
-      .col-sm-4
-        h5
-          | Target Bear Pair
-        li
-          a[href="minipair/MANAUSDT"] MANAUSDT 
-        li
-          |  MBOXUSDT 
-        li
-          |  OMGUSDT 
+      .col-sm-12
+        h4
+          | Market Cap
+    .row
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/BTCUSDT"] 
+          img.mr-3.mt-3.center-block.rounded-circle[src="/btc.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/ETHUSDT"]
+          img.mr-3.mt-3.rounded-circle[src="/eth.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/BNBUSDT"]
+          img.mr-3.mt-3.rounded-circle[src="/bnb.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/SOLUSDT"] 
+          img.mr-3.mt-3.rounded-circle[src="/sol.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/ADAUSDT"]
+          img.mr-3.mt-3.rounded-circle[src="/ada.png" style="width:60px;"]
+      .col-sm-2.col-lg-2.col-md-2
+        a[href="minipair/XRPUSDT"] 
+          img.mr-3.mt-3.rounded-circle[src="/xrp.png" style="width:60px;"]
 .container
     - if pairlist.any?
-      div class="pairtable"
-        table class="table table-hover pair-table" id="sortable"
+      div class="pairtable col-sm-12"
+        table.table-responsive-lg class="table table-hover pair-table col-sm-12" id="sortable"
           thead
             tr
               th Symbol
-              th Volume Change %
-              th Spot Change %
+              th
+                | Volume Change % 
+              th[data-cell-style="displaycolor" id="spot_change"] 
+                |Spot Change %
               th Funding Rate
               th L/S Ratio
               th Open Interest
@@ -37,7 +44,7 @@
               tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
                 td
                     a [href = "minipair/#{pair.symbol}"] #{pair.symbol}
-                td
+                td 
                   | #{'%.2f' % pair.volume_change_percent} 
                 td 
                   | #{'%.2f' % pair.spot_change_percent}
@@ -49,3 +56,5 @@
                   | #{'%.2f' % pair.open_interest}
                 td 
                   | #{pair.signal}
+              /[data-field="report_state" data-sortable="true" data-formatter="displaycolor"]
+                  

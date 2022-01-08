@@ -21,6 +21,10 @@ module CryptoExpert
         @request.minipair_list(list)
       end
 
+      def sortedpair_list
+        @request.sortedpair_list
+      end
+
       def get_minipair(symbol)
         @request.get_minipair(symbol)
       end
@@ -29,7 +33,7 @@ module CryptoExpert
       class Request
         def initialize(config)
           @api_host = config.API_HOST
-          @api_root = config.API_HOST + '/api/v1'
+          @api_root = "#{config.API_HOST}/api/v1"
         end
 
         def get_root # rubocop:disable Naming/AccessorMethodName
@@ -40,21 +44,30 @@ module CryptoExpert
           call_api('get', ['minipair'],
                    'list' => Value::WatchedList.to_encoded(list))
         end
-        
+
         def get_minipair(symbol)
-            call_api('post', ['minipair', symbol])
+          call_api('post', ['minipair', symbol])
+        end
+
+        def sortedpair_list
+          call_api('get', ['sortedpair', nil])
         end
 
         private
 
         def params_str(params)
           params.map { |key, value| "#{key}=#{value}" }.join('&')
-            .then { |str| str ? '?' + str : '' }
+            .then { |str| str ? "?#{str}" : '' }
         end
 
         def call_api(method, resources = [], params = {})
           api_path = resources.empty? ? @api_host : @api_root
-          url = [api_path, resources].flatten.join('/') + params_str(params)
+          url = if resources[0] == 'sortedpair'
+                  "#{api_path}/#{resources[0]}"
+                else
+                  [api_path, resources].flatten.join('/') + params_str(params)
+                end
+          # puts url
           HTTP.headers('Accept' => 'application/json').send(method, url)
             .then { |http_response| Response.new(http_response) }
         rescue StandardError
@@ -66,7 +79,7 @@ module CryptoExpert
       class Response < SimpleDelegator
         NotFound = Class.new(StandardError)
 
-        SUCCESS_CODES = (200..299).freeze
+        SUCCESS_CODES = (200..299)
 
         def success?
           code.between?(SUCCESS_CODES.first, SUCCESS_CODES.last)

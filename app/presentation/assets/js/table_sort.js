@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  console.log(JSON.stringify($("#sortable").text()));
+  // console.log(JSON.stringify($("#sortable").text()));
 
   table = $("#sortable").DataTable({
     // ordering: true,
-    order: [2, "desc"],
+    // order: [2, "desc"],
     initComplete: function (settings, json) {},
     language: {
       sProcessing: "Processing.",
@@ -13,7 +13,7 @@ $(document).ready(function () {
       sInfoEmpty: "show 0 to 0 records，total: 0",
       sInfoFiltered: "(filter _MAX_ results)",
       sInfoPostFix: "",
-      sSearch: "search:",
+      sSearch: "search table:",
       sUrl: "",
       sEmptyTable: "no data",
       sLoadingRecords: "Loading...",

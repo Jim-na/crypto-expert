@@ -10,16 +10,21 @@ module CryptoExpert
     plugin :halt
     plugin :flash
     plugin :all_verbs # recognizes HTTP verbs beyond GET/POST (e.g., DELETE)
+    plugin :caching
     plugin :render, engine: 'slim', views: 'app/presentation/view_html'
     # plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
-                    css: 'style.css', js: 'table_sort.js'
-
+                    css: 'style.css', js: ['table_sort.js','table_color.js']
+    
+    opts[:root] = 'app/presentation/assets/'
+    plugin :public, root: 'img'              
+                    
     use Rack::MethodOverride # for other HTTP verbs (with plugin all_verbs)
 
     route do |routing|
       routing.assets # load CSS and js
-
+      routing.public
+      
       routing.root do
         session[:watching] ||= []
         puts session[:watching].compact
@@ -30,26 +35,47 @@ module CryptoExpert
           routing.redirect '/'
         else
           minipairs = result.value!.minipairs
-          if minipairs.none?
-            flash.now[:notice] = 'Add a minipair to get started'
-          end
+          flash.now[:notice] = 'Add a minipair to get started or go check recommendation list' if minipairs.none?
           # session[:watching] = minipairs.map(&:fullname)
           viewable_minipairs = Views::MiniPairList.new(minipairs)
         end
-        
+
         # viewable_minipairs = viewable_minipairs_made.value!
         view 'home', locals: { pairlist: viewable_minipairs }
         # puts pairlist
         # view 'home'
       end
+      # TODO: This service takes too long , maybe need some hint for user to wait
+      routing.on 'sortedpair' do
+        routing.is do
+          routing.get do
+            puts session[:watching].compact
+            result = Service::ListSortedPairs.new.call
+            if result.failure?
+              flash[:error] = result.failure
+              viewable_minipairs = []
+              routing.redirect '/'
+            else
+              minipairs = result.value!.minipairs
+              flash.now[:notice] = 'Add a minipair to get started' if minipairs.none?
+              # session[:watching] = minipairs.map(&:fullname)
+              viewable_minipairs = Views::MiniPairList.new(minipairs)
+            end
 
+            # viewable_minipairs = viewable_minipairs_made.value!
+            # TODO: Cache didn't work?? this may fail (reponse has no varaible pair??)
+            response.expires 6000, public: true
+            view 'sorted_signal', locals: { pairlist: viewable_minipairs }
+          end
+        end
+      end
       routing.on 'minipair' do
         routing.is do
           # POST /project/
           routing.post do
-            input = {symbol: routing.params['symbol'].upcase}
+            input = { symbol: routing.params['symbol'].upcase }
             symbol_request = Forms::NewSymbol.new.call(input)
-            puts "req ",symbol_request[:symbol]
+            puts 'req ', symbol_request[:symbol]
             minipair_made = Service::GetMiniPairSignal.new.call(symbol_request[:symbol])
             if minipair_made.failure?
               flash[:error] = minipair_made.failure
@@ -62,25 +88,6 @@ module CryptoExpert
             # puts "post",session[:watching]
             routing.redirect "minipair/#{symbol_request[:symbol]}"
           end
-          routing.get do
-            puts session[:watching].compact
-            result = Service::ListMiniPairs.new.call(session[:watching].compact)
-            if result.failure?
-              flash[:error] = result.failure
-              viewable_minipairs = []
-              routing.redirect '/'
-            else
-              minipairs = result.value!.minipairs
-              if minipairs.none?
-                flash.now[:notice] = 'Add a minipair to get started'
-              end
-              # session[:watching] = minipairs.map(&:fullname)
-              viewable_minipairs = Views::MiniPairList.new(minipairs)
-            end
-            
-            # viewable_minipairs = viewable_minipairs_made.value!
-            view 'minipair_index', locals: { pairlist: viewable_minipairs }
-          end
         end
 
         routing.on String do |symbol|
@@ -91,7 +98,6 @@ module CryptoExpert
             view 'minipair', locals: { pair: minipair }
           end
         end
-        
       end
     end
   end

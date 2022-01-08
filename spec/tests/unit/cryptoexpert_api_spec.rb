@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../helpers/spec_helper.rb'
+# TODO: should we add new test for new api sortedpair?
+require_relative '../../helpers/spec_helper'
 
 describe 'Unit test of CryptoExpert API gateway' do
   it 'must report alive status' do
@@ -44,5 +45,4 @@ describe 'Unit test of CryptoExpert API gateway' do
     _(minipair['open_interest']).wont_be_nil
     _(minipair['spot_change_percent']).wont_be_nil
   end
-
 end

@@ -1,0 +1,46 @@
+/ TODO: frontend design change? [data-field="date" data-filter-control="select" data-sortable="true"] 
+.container
+  .jumbotron.text-left.col-sm-12 style="padding-top:30px;padding-bottom:15px"
+    .row
+      h4
+        | Recommendation list.
+    .row style="padding-left:20px"
+      text 
+        | Data from Binance: (4h)
+        li 
+          | spot data: volume change % ,price change % 
+        li  
+          | perpetual futures data: funding rate history, long/short ratio, open interest
+    .row style="padding-bottom:20px"
+      h6
+        | We take all the spot and futures data into account, calculating the signals.
+.container
+    - if pairlist.any?
+      div class="pairtable col-sm-12"
+        table.table-responsive-lg class="table table-hover pair-table col-sm-12" id="sortable"
+          thead
+            tr
+              th Symbol
+              th Volume Change %
+              th Spot Change %
+              th Funding Rate
+              th L/S Ratio
+              th Open Interest 
+              th Signal
+          tbody
+            - pairlist.each do |pair|
+              tr class="table-row pair-row" data-href="minipair/#{pair.symbol}"
+                td
+                    a [href = "minipair/#{pair.symbol}"] #{pair.symbol}
+                td
+                  | #{'%.2f' % pair.volume_change_percent} 
+                td 
+                  | #{'%.2f' % pair.spot_change_percent}
+                td
+                  | #{'%.5f' %pair.funding_rate}
+                td 
+                  | #{'%.2f' % pair.longshort_ratio}
+                td 
+                  | #{'%.2f' % pair.open_interest}
+                td 
+                  | #{pair.signal}

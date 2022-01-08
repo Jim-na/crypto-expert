@@ -1,13 +1,5 @@
-/ TODO: fix pair table css and with diff color of now & history data
 .container
   - alerttype = ('danger' if pair.signal == 'BEAR') || ('success'  if pair.signal == 'BULL') ||'warning'
-  / - if pair.signal == "BULL" then 
-  / .alert.alert-success
-  / - elsif pair.signal == "BEAR" 
-  / .alert.alert-danger 
-  / - else 
-  / .alert.alert-info 
-  / - end
   .alert class="alert-#{alerttype}"
     strong
     .row
@@ -19,15 +11,6 @@
         h4 
           span class="table_signal"
             = pair.signal
-      / .col-3
-      /   h5
-      /     span
-      /         = "Time"
-      /     text
-      /       span.pair.time style="padding-left:20px" id='pair.time'
-      /           = pair.time
-    
-
   .row
     .col-lg-3.col-sm-12
       .jumbotron.text-left
