@@ -42,7 +42,7 @@ module CryptoExpert
 
         # viewable_minipairs = viewable_minipairs_made.value!
         view 'home', locals: { pairlist: viewable_minipairs }
-        # puts pairlist
+        puts pairlist
         # view 'home'
       end
       # TODO: This service takes too long , maybe need some hint for user to wait
