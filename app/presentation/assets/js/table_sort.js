@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   table = $("#sortable").DataTable({
     ordering: true,
-    order: [[7, "desc"]],
+    order: [[6, "desc"]],
     initComplete: function (settings, json) {},
     language: {
       sProcessing: "Processing.",
