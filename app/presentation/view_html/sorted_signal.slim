@@ -13,7 +13,7 @@
           | perpetual futures data: funding rate history, long/short ratio, open interest
     .row style="padding-bottom:20px"
       h6
-        | We take all the spot and futures data into account, calculating the signals.
+        | We take the spot and futures data into account, calculating the signals.
 .container
     - if pairlist.any?
       div class="pairtable col-sm-12"
@@ -26,6 +26,7 @@
               th Funding Rate
               th L/S Ratio
               th Open Interest 
+              th Score
               th Signal
           tbody
             - pairlist.each do |pair|
@@ -43,4 +44,7 @@
                 td 
                   | #{'%.2f' % pair.open_interest}
                 td 
+                  | #{pair.signal_score}
+                td 
                   | #{pair.signal}
+                

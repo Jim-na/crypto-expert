@@ -2,8 +2,8 @@ $(document).ready(function () {
   // console.log(JSON.stringify($("#sortable").text()));
 
   table = $("#sortable").DataTable({
-    // ordering: true,
-    // order: [2, "desc"],
+    ordering: true,
+    order: [[7, "desc"]],
     initComplete: function (settings, json) {},
     language: {
       sProcessing: "Processing.",
